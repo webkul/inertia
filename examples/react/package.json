@@ -1,0 +1,15 @@
+{
+    "private": true,
+    "scripts": {
+        "build": "esbuild app.jsx --bundle --jsx=automatic --outfile=dist/app.js",
+        "watch": "npm run build -- --watch"
+    },
+    "dependencies": {
+        "@inertiajs/react": "^2.0",
+        "react": "^18.3",
+        "react-dom": "^18.3"
+    },
+    "devDependencies": {
+        "esbuild": "^0.23"
+    }
+}

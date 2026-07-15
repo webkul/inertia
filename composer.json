@@ -1,0 +1,27 @@
+{
+    "name": "webkulwp/inertia",
+    "description": "Inertia.js server-side adapter for PHP. Handles full visits, Inertia XHR visits, asset-version 409 handshakes and partial reloads. Framework-agnostic, with transparent WordPress integration.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "inertia",
+        "inertiajs",
+        "spa",
+        "wordpress"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Webkul\\Inertia\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Himanshu"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4"
+    }
+}
