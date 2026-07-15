@@ -15,9 +15,13 @@
  *   telling the client to do one hard reload to pick up new bundles.
  * - Partial reloads -> prop filtering via `X-Inertia-Partial-Data` /
  *   `X-Inertia-Partial-Except` headers.
+ * - Form submissions -> `redirect()` answers non-GET requests with a 303
+ *   so the Inertia client follows up with a GET visit.
+ * - Shared props -> `share()` merges props (auth user, validation errors,
+ *   flash messages) into every render() call.
  *
  * @package Webkul\Inertia
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace Webkul\Inertia;
@@ -66,6 +70,15 @@ class Inertia {
 	 * @var string
 	 */
 	protected $charset = 'UTF-8';
+
+	/**
+	 * Props shared with every render() call (e.g. auth user, validation
+	 * errors, flash messages). Merged under the page props; render() props
+	 * win on key collision.
+	 *
+	 * @var array
+	 */
+	protected $shared_props = array();
 
 	/**
 	 * Main Inertia Instance
@@ -139,6 +152,48 @@ class Inertia {
 	}
 
 	/**
+	 * Share a prop with every subsequent render() call.
+	 *
+	 * Mirrors Inertia::share() from inertia-laravel: pass a key/value pair
+	 * or an associative array. Typical use: validation errors and flash
+	 * messages pulled from a session-like store. Props passed to render()
+	 * win on key collision.
+	 *
+	 * @param string|array $key   The prop name, or an array of props.
+	 * @param mixed        $value The prop value (closures resolve lazily).
+	 * @return Inertia
+	 */
+	public function share( $key, $value = null ) {
+		if ( is_array( $key ) ) {
+			$this->shared_props = array_merge( $this->shared_props, $key );
+		} else {
+			$this->shared_props[ $key ] = $value;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Redirect the current request, Inertia-style, and terminate.
+	 *
+	 * Mirrors what inertia-laravel does after form submissions: a plain
+	 * HTTP redirect that the Inertia client follows with a GET visit.
+	 * Non-GET requests (POST/PUT/PATCH/DELETE) get a 303 so the follow-up
+	 * request is guaranteed to be a GET; GET requests get a 302.
+	 *
+	 * @param string $url The redirect target.
+	 * @return void
+	 */
+	public function redirect( $url ) {
+		$method = strtoupper( $this->server_value( 'REQUEST_METHOD' ) );
+		$status = ( '' === $method || 'GET' === $method ) ? 302 : 303;
+
+		$this->send_status( $status );
+		header( 'Location: ' . $this->sanitize_url( $url ) );
+		exit;
+	}
+
+	/**
 	 * Respond to the current request with an Inertia page.
 	 *
 	 * Sends JSON for Inertia visits, otherwise renders the HTML shell
@@ -151,7 +206,8 @@ class Inertia {
 	 * @return void
 	 */
 	public function render( $component, $props = array() ) {
-		$url = $this->current_url();
+		$url   = $this->current_url();
+		$props = array_merge( $this->shared_props, $props );
 
 		header( 'Vary: X-Inertia' );
 

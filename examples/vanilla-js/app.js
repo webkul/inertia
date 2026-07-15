@@ -1,6 +1,6 @@
 // Example client: a minimal Inertia client in plain JavaScript, no framework.
 //
-// It demonstrates the whole protocol the webkulwp/inertia package speaks:
+// It demonstrates the whole protocol the webkul/inertia package speaks:
 //   1. boot from the JSON script tag rendered into the HTML shell,
 //   2. SPA visits via fetch() with the X-Inertia headers,
 //   3. the 409 + X-Inertia-Location stale-asset handshake,

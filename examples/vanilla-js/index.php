@@ -1,6 +1,6 @@
 <?php
 /**
- * Example: webkulwp/inertia with a plain JavaScript client — no framework.
+ * Example: webkul/inertia with a plain JavaScript client — no framework.
  *
  * Run with:  php -S localhost:8000 index.php
  *
@@ -73,7 +73,7 @@ switch ( $path ) {
 		$inertia->render(
 			'Home',
 			array(
-				'message' => 'Served by webkulwp/inertia',
+				'message' => 'Served by webkul/inertia',
 			)
 		);
 		break;

@@ -1,4 +1,4 @@
-# webkulwp/inertia
+# webkul/inertia
 
 Inertia.js server-side adapter for **PHP** — the equivalent of what
 `inertia-laravel` provides on Laravel, for any plain-PHP application.
@@ -25,7 +25,7 @@ It handles the full Inertia protocol:
 ## Installation
 
 ```bash
-composer require webkulwp/inertia
+composer require webkul/inertia
 ```
 
 While the package lives inside a project as a path repository, add to the
@@ -37,7 +37,7 @@ project's `composer.json`:
         { "type": "path", "url": "packages/inertia" }
     ],
     "require": {
-        "webkulwp/inertia": "@dev"
+        "webkul/inertia": "@dev"
     }
 }
 ```

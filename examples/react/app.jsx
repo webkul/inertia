@@ -1,4 +1,4 @@
-// Example client: @inertiajs/react against a webkulwp/inertia backend.
+// Example client: @inertiajs/react against a webkul/inertia backend.
 //
 // Build:  npm install && npm run build   (outputs dist/app.js)
 

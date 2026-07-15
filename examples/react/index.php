@@ -1,6 +1,6 @@
 <?php
 /**
- * Example: webkulwp/inertia with a React client (@inertiajs/react).
+ * Example: webkul/inertia with a React client (@inertiajs/react).
  *
  * Run with:  php -S localhost:8000 index.php
  * Build the client first:  npm install && npm run build
@@ -75,7 +75,7 @@ switch ( $path ) {
 		$inertia->render(
 			'Home',
 			array(
-				'message' => 'Served by webkulwp/inertia',
+				'message' => 'Served by webkul/inertia',
 			)
 		);
 		break;

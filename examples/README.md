@@ -1,6 +1,6 @@
 # Examples
 
-Two self-contained client examples for `webkulwp/inertia`. Both talk to the same
+Two self-contained client examples for `webkul/inertia`. Both talk to the same
 kind of PHP entry point (see `index.php` in each folder) — the only thing that
 changes is how the browser side consumes the Inertia page object.
 
