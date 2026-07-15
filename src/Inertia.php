@@ -1,6 +1,6 @@
 <?php
 /**
- * Inertia protocol adapter for PHP.
+ * Inertia protocol adapter for WordPress and PHP.
  *
  * Framework-agnostic: works with plain PHP and integrates transparently
  * with WordPress (WP helpers are used automatically when they exist).
